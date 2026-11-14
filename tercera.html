@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CREW · Interfaz del astronauta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="./src/css/tercera.css">
+</head>
+<body>
+
+<!-- Iconos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5C4.5 15 3 10.2 5.6 7.4 7.9 5 11 6 12 8.2 13 6 16.1 5 18.4 7.4 21 10.2 19.5 15 12 20.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 12h3l1.5-2.5 2 5 1.5-2.5H18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3C12 3 5.5 10.5 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 10.5 12 3 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 0l0 0a2 2 0 0 1 0 3L8 19 4 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 7l3 3" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-bone" viewBox="0 0 24 24"><path d="M7 9.5A2.7 2.7 0 1 1 4.3 7a2.7 2.7 0 0 1 4.2-1.6L18.6 15.5A2.7 2.7 0 1 1 20 19a2.7 2.7 0 0 1-4.6.8L7 9.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lungs" viewBox="0 0 24 24"><path d="M12 4v9M12 9c-3-1-6 1-6.5 5-.4 3 1 5 3 5 2 0 3.5-1.5 3.5-4M12 9c3-1 6 1 6.5 5 .4 3-1 5-3 5-2 0-3.500-1.500-3.500-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-therm" viewBox="0 0 24 24"><path d="M10 14.200V5a2 2 0 0 1 4 0v9.200a4 4 0 1 1-4 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="17" r="1.500" fill="currentColor"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M11 4.500C9 3 6 4 6 6.500 4 7 3.500 10 5 11.200 3.500 12.800 4.500 16 7 16c.5 2 3 3 4 1.500zM13 4.500C15 3 18 4 18 6.500c2 .5 2.500 3.500 1 4.700 1.500 1.600.5 4.800-2 4.800-.5 2-3 3-4 1.500z" fill="none" stroke="currentColor" stroke-width="1.700" stroke-linejoin="round"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.500A8 8 0 1 1 9.500 4a6.500 6.500 0 0 0 10.500 10.500Z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/></symbol>
+  <symbol id="i-rad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 10V3.500a9 9 0 0 1 7.800 4.500L14 11.200M10.300 13 6.500 18.800A9 9 0 0 1 3.500 12.600L10 12M13.700 13l3.800 5.800A9 9 0 0 1 8.200 20" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="app">
+
+  <!-- CABECERA -->
+  <header class="top">
+    <div class="brand">
+      <p class="link"><svg class="ico" aria-hidden="true"><use href="#i-chip"/></svg><span id="linkText">ENLACE DE TELEMETRÍA ESTABLECIDO</span></p>
+      <h1>CREW <span>v1.0.0</span></h1>
+    </div>
+
+    <div class="subject">
+      <span class="lbl">ID DEL SUJETO</span>
+      <strong id="subjectId">ASTRO-000 / Nombre Apellido</strong>
+    </div>
+
+    <div class="met">
+      <span class="lbl">TIEMPO DE MISIÓN</span>
+      <strong id="met" aria-label="Tiempo transcurrido de misión">000:00:00:00</strong>
+    </div>
+
+    <div class="battery" id="battery" role="img" aria-label="Batería del dispositivo">
+      <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><rect x="1" y="1" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="19" y="4.500" width="2" height="5" rx="1" fill="currentColor"/><rect id="batFill" x="3" y="3" width="11" height="8" rx="1" fill="currentColor"/></svg>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <section class="col" aria-label="Constantes vitales y huesos">
+
+      <article class="card c-cyan" id="card-hr">
+        <header class="card-h">
+          <h2>FRECUENCIA CARDIACA</h2>
+          <svg class="ico beat" aria-hidden="true"><use href="#i-heart"/></svg>
+        </header>
+        <p class="value"><span id="hr">72</span><small>lpm</small></p>
+        <svg class="spark" viewBox="0 0 200 60" preserveAspectRatio="none" role="img" aria-label="Frecuencia cardiaca, últimos 40 segundos">
+          <polygon id="hrArea" points="" class="spark-area"/>
+          <polyline id="hrLine" points="" class="spark-line"/>
+        </svg>
+      </article>
+
+      <article class="card c-green" id="card-bp">
+        <header class="card-h">
+          <h2>PRESIÓN ARTERIAL</h2>
+          <svg class="ico dim" aria-hidden="true"><use href="#i-drop"/></svg>
+        </header>
+        <p class="value"><span id="bp">118/76</span><small>mmHg</small></p>
+        <div class="meter" role="presentation"><i id="bpBar"></i></div>
+        <p class="status" id="bpStatus">ESTADO: NOMINAL</p>
+      </article>
+
+      <article class="card c-amber" id="card-glu">
+        <header class="card-h">
+          <h2>AZÚCAR EN SANGRE</h2>
+          <svg class="ico" aria-hidden="true"><use href="#i-pen"/></svg>
+        </header>
+        <p class="value"><span id="glu">94</span><small>mg/dL</small></p>
+        <div class="bars" id="gluBars" role="img" aria-label="Glucosa, últimas 7 lecturas"></div>
+      </article>
+
+      <article class="card c-green" id="card-bone">
+        <header class="card-h">
+          <h2 class="pink">MASA ÓSEA (EST.)</h2>
+          <svg class="ico pink" aria-hidden="true"><use href="#i-bone"/></svg>
+        </header>
+        <p class="value"><span id="bone">2,9</span><small>kg · esqueleto</small></p>
+        <div class="meter" role="presentation"><i id="boneBar"></i></div>
+        <p class="status" id="boneStatus">ESTADO: VIGILAR · −3 % VS. LÍNEA BASE</p>
+        <p class="hint">Estimación del modelo; no hay DXA a bordo.</p>
+      </article>
+
+    </section>
+
+    <!-- CENTRO -->
+    <section class="center" aria-label="Asistente de salud">
+      <figure class="portrait">
+        <img id="photo" alt="" hidden>
+        <svg id="avatar" viewBox="0 0 320 320" role="img" aria-label="Retrato del astronauta (marcador de posición)">
+          <defs>
+            <linearGradient id="gSuit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3F6FC"/><stop offset="1" stop-color="#AEBBD6"/></linearGradient>
+            <linearGradient id="gSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C99572"/><stop offset="1" stop-color="#A5714F"/></linearGradient>
+            <clipPath id="clipC"><circle cx="160" cy="160" r="158"/></clipPath>
+          </defs>
+        
+        </svg>
+        <figcaption class="sr-only">Pon una foto en assets/astronaut.jpg para sustituir este marcador.</figcaption>
+      </figure>
+
+      <div class="bubble" id="bubble" role="log" aria-live="polite" aria-label="Mensajes del asistente">
+        <p class="hi" id="bubbleHi">Hola, Ericka</p>
+        <p class="msg" id="bubbleMsg"></p>
+      </div>
+
+      <div class="quick" id="quick"></div>
+
+      <form class="ask" id="askForm" autocomplete="off">
+        <label class="sr-only" for="askInput">Escribe a tu asistente</label>
+        <input id="askInput" type="text" placeholder="Pregunta sobre tu sueño, tus huesos, tu ánimo…" maxlength="200">
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <!-- COLUMNA DERECHA -->
+    <section class="col" aria-label="Respiración, ánimo, sueño y radiación">
+
+      <article class="card c-green" id="card-spo2">
+        <header class="card-h right">
+          <svg class="ico cyan" aria-hidden="true"><use href="#i-lungs"/></svg>
+          <h2 class="cyan">OXÍGENO EN SANGRE</h2>
+        </header>
+        <p class="value right"><span id="spo2">99</span><small>SpO₂ %</small></p>
+        <div class="meter cyan" role="presentation"><i id="spo2Bar"></i></div>
+      </article>
+
+      <article class="card c-green" id="card-temp">
+        <header class="card-h right">
+          <svg class="ico green" aria-hidden="true"><use href="#i-therm"/></svg>
+          <h2 class="green">TEMPERATURA CORPORAL</h2>
+        </header>
+        <p class="value right"><span id="temp">36,8</span><small>°C</small></p>
+        <div class="segs" id="tempSegs" role="img" aria-label="Escala de temperatura"></div>
+      </article>
+
+      <article class="card c-red" id="card-mood">
+        <header class="card-h right">
+          <svg class="ico red" aria-hidden="true"><use href="#i-brain"/></svg>
+          <h2 class="red">ESTADO DE ÁNIMO</h2>
+        </header>
+        <div class="dots" id="moodDots" role="img" aria-label="Ánimo 3 de 5"></div>
+        <p class="note" id="moodNote">Estrés estimado: 14/100 (modelo). Ánimo a la baja 3 días seguidos respecto a tu línea base.</p>
+      </article>
+
+      <article class="card c-green" id="card-sleep">
+        <header class="card-h right">
+          <svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg>
+          <h2>HORAS DE SUEÑO (ÚLT. 24 H)</h2>
+        </header>
+        <p class="value right"><span id="sleep">06:24</span><small>h</small></p>
+        <p class="status right" id="sleepStatus">RECOMENDADO: 7 A 9 H</p>
+      </article>
+
+      <article class="card c-amber" id="card-rad">
+        <header class="card-h right">
+          <svg class="ico" aria-hidden="true"><use href="#i-rad"/></svg>
+          <h2 class="amber">DOSIS DE RADIACIÓN</h2>
+        </header>
+        <p class="value right"><span id="rad">1,8</span><small>mSv hoy</small></p>
+        <div class="meter amber" role="presentation"><i id="radBar"></i></div>
+        <div class="limits"><span id="radCum">ACUMULADA: 198 mSv</span><span class="lim">LÍMITE CARRERA: 600 mSv</span></div>
+        <p class="note">Valores simulados de tránsito a Marte. Módulo de blindaje operando al 98 %.</p>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- BARRA INFERIOR -->
+  <footer class="bar">
+    <ul class="legend">
+      <li><i class="dot green"></i>SENSORES INTERNOS</li>
+      <li><i class="dot green"></i>TELEMETRÍA EXTERNA</li>
+      <li><i class="dot amber"></i><span id="uplink">ENLACE SATELITAL (LAG 42 MS)</span></li>
+    </ul>
+    <div class="actions">
+      <span class="sim">Datos simulados</span>
+      <button type="button" class="btn cyan" id="scanBtn">ESCANEO CORPORAL</button>
+      <button type="button" class="btn" id="exportBtn">EXPORTAR REGISTROS</button>
+    </div>
+  </footer>
+
+  <p class="disclaimer">Herramienta de apoyo a la autoevaluación, no sustituye a un diagnóstico médico. Rangos orientativos configurables por el equipo médico.</p>
+</div>
+
+<script src="./src/js/tercera.js"></script>
+</body>
+</html>
