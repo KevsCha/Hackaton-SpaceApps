@@ -1,0 +1,41 @@
+body {
+    background-color: #06090d;
+}
+
+.card {
+    background-color: #a3b6ff;
+    border-color: #e6ecfe;
+    border-radius: 30px;
+    padding: 5px;
+    margin: 2px;
+}
+
+p,
+h3,
+h4,
+h5 {
+    color: white;
+    margin: 1px;
+}
+
+.data_sum_ups {
+    display: flex;
+}
+
+.data_sum_ups div {
+    margin: 35px;
+}
+
+.data_sum_ups > img {
+    display: flex;
+}
+
+/* .data_sum_ups > nav {
+    display: flex;
+} */
+
+inbox {
+    display: flex;
+}
+
+/* h3 h4 h5 */
