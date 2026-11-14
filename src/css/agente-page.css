@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background-color: #05080c;
+
+    background-image:
+        linear-gradient(rgba(3, 7, 12, 0.65),
+            rgba(3, 7, 12, 0.65)),
+        url("../img/deep_space_background.png");
+
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+
+    padding: 30px;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background: white;
+    border-radius: 15px;
+}
+
+.container-inputs {
+    width: 100%;
+    max-width: 1030px;
+    height: 78px;
+
+    margin: 0 auto;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-sizing: border-box;
+
+    background: rgba(12, 16, 21, 0.92);
+
+    border: 1px solid rgba(0, 220, 255, 0.25);
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.35),
+        inset 0 0 15px rgba(0, 220, 255, 0.02);
+}
+
+
+/* =========================
+   ICONOS
+========================= */
+
+.container-inputs .icono {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(30, 35, 42, 0.8);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 11px;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+.container-inputs .icono:hover {
+    border-color: rgba(0, 220, 255, 0.4);
+    background: rgba(25, 40, 47, 0.9);
+}
+
+.container-inputs .icono img {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.container-inputs .input-bar {
+    height: 46px;
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    background: #0b0f14;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 11px;
+
+    box-sizing: border-box;
+}
+
+.container-inputs .input-bar input {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 24px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #d8e4e8;
+
+    font-family: "Share Tech Mono", monospace;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+.container-inputs .input-bar input::placeholder {
+    color: #3f464e;
+    opacity: 1;
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+.container-inputs .btn {
+    height: 46px;
+
+    flex: 0 0 132px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inputs .btn button {
+    width: 100%;
+    height: 46px;
+
+    border: none;
+    border-radius: 11px;
+
+    background: #08dff5;
+
+    color: #041014;
+
+    font-family: "Orbitron", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 12px rgba(0, 220, 255, 0.15);
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+.container-inputs .btn button:hover {
+    background: #20e7f8;
+
+    box-shadow:
+        0 0 20px rgba(0, 220, 255, 0.35);
+}
+
+.container-inputs .btn button:active {
+    transform: scale(0.98);
+}
