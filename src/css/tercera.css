@@ -283,13 +283,34 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--cyan); outl
 
 /* ===== Adaptación a pantallas pequeñas ===== */
 @media (max-width: 1100px) {
-.back { grid-column: 1 / -1; justify-self: start; }
+  .top {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas:
+      "back back back"
+      "brand subject met"
+      "brand subject battery";
+    gap: 18px;
+  }
+  .back { grid-area: back; justify-self: start; }
+  .brand { grid-area: brand; }
+  .subject { grid-area: subject; }
+  .met { grid-area: met; }
+  .battery { grid-area: battery; }
   .grid { grid-template-columns: 1fr 1fr; }
   .center { grid-column: 1 / -1; order: -1; }
+
 }
 @media (max-width: 720px) {
   .app { padding: 16px; }
-  .top { grid-template-columns: 1fr auto; gap: 14px; }
-  .subject { grid-column: 1 / -1; order: 3; }
+  .top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "back back"
+      "brand brand"
+      "subject subject"
+      "met battery";
+    gap: 16px;
+            height: 300px;
+  }
   .grid { grid-template-columns: 1fr; }
 }
