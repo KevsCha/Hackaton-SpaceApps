@@ -1,0 +1,29 @@
+{
+  "modelos": [
+    {
+      "id": "corazon",
+      "nombre": "Corazón",
+      "archivo": " /src/models/corazon/corazon.glb"
+    },
+    {
+      "id": "torax",
+      "nombre": "Tórax",
+      "archivo": "/src/models/torax/torax.glb"
+    },
+    {
+      "id": "pulmon",
+      "nombre": "Pulmón",
+      "archivo": "/src/models/pulmon/pulmon.glb"
+    },
+    {
+      "id": "higado",
+      "nombre": "Hígado",
+      "archivo": "/src/models/higado/higado.glb"
+    },
+    {
+      "id": "ojo",
+      "nombre": "Ojo",
+      "archivo": "/src/models/ojo/ojo.glb"
+    }
+  ]
+}
