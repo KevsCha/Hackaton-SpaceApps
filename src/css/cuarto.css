@@ -200,7 +200,11 @@ button, input { font-family: inherit; }
   object-fit: cover;
   object-position: center 20%;
 }
+.ask {
+    display: none !important;
+}
 .bubble {
+    display: none !important;
   width: min(100%, 440px);
   background: rgba(139,139,255,.07);
   border: 1px solid var(--violet);
@@ -211,7 +215,7 @@ button, input { font-family: inherit; }
 .bubble .hi { font: 600 16px/1.2 var(--sans); color: #B5B8FF; margin-bottom: 8px; }
 .bubble .msg { font: italic 400 12.5px/1.6 var(--mono); color: #D4DBF2; }
 
-.quick { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: min(100%, 440px); }
+.quick { display: none !important; flex-wrap: wrap; justify-content: center; gap: 8px; width: min(100%, 440px); }
 .quick button {
   min-height: 40px; padding: 0 14px;
   border: 1px solid rgba(139,139,255,.5); border-radius: 20px;
