@@ -29,7 +29,7 @@ canvasContainer.addEventListener("touchend", function(e) {
     
     if (tapLength < 300 && tapLength > 0) {
         e.preventDefault(); // Evita zoom o comportamientos extraños
-        window.location.href = "../../cuarto.html";
+        window.location.href = "./cuarto.html";
     }
     
     lastTap = currentTime;
