@@ -51,7 +51,7 @@ let ecorcheModel = null;
 // CARGAR MODELO 1: Esqueleto Humano
 // ==========================================
 loader.load(
-  "../../src/models/esqueleto-humano/Esqueleto humano.glb",
+  "./src/models/esqueleto-humano/Esqueleto humano.glb",
   (gltf) => {
     esqueletoModel = gltf.scene;
 
@@ -80,7 +80,7 @@ loader.load(
 // CARGAR MODELO 2: Cuerpo Ecorché / Músculos
 // ==========================================
 loader.load(
-  "../../src/models/male_full_body/male_full_body_ecorche.glb", // <--- Pon aquí la ruta real de tu segundo modelo .glb
+  "./src/models/male_full_body/male_full_body_ecorche.glb", // <--- Pon aquí la ruta real de tu segundo modelo .glb
   (gltf) => {
     ecorcheModel = gltf.scene;
 
