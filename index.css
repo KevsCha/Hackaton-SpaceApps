@@ -547,3 +547,164 @@ footer>a {
     height: 100% !important;
     outline: none;
 }
+
+/* -------------------------- RESPONSIVE -------------------------- */
+@media (max-width: 1200px) {
+    body {
+        padding: 20px;
+    }
+
+    main {
+        gap: 20px;
+    }
+
+    main .card {
+        width: min(360px, 30vw);
+    }
+
+    .left_section {
+        left: 2%;
+    }
+
+    .right_section {
+        right: 2%;
+    }
+
+    .img_centre img {
+        max-width: 300px;
+    }
+
+    #canvas-container {
+        width: 300px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        padding: 16px;
+    }
+
+    header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    header .card {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    main {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .left_section,
+    .right_section {
+        position: static;
+        width: 100%;
+        gap: 16px;
+        transform: none;
+    }
+
+    .left_section {
+        order: 2;
+    }
+
+    .right_section {
+        order: 3;
+    }
+
+    .img_centre {
+        order: 1;
+    }
+
+    main .card {
+        width: 100%;
+    }
+
+    .data_sum_ups {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 0;
+        border-radius: 24px;
+    }
+
+    .data_sum_ups>div:nth-child(2)::after,
+    .data_sum_ups>div:nth-child(4)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+        background-attachment: scroll;
+    }
+
+    .logo_container img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logo_container h4 {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .conexion_info_container p {
+        display: none;
+    }
+
+    .conexion_info_container img {
+        width: 20px;
+        height: 20px;
+    }
+
+    header .card {
+        padding: 6px 12px;
+    }
+
+    header .card img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .img_centre img {
+        max-width: 260px;
+    }
+
+    #canvas-container {
+        width: min(100%, 280px);
+        height: 420px;
+    }
+
+    main .card {
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 28px;
+    }
+
+    main .card .description {
+        font-size: 0.75rem;
+    }
+
+    .data_sum_ups {
+        grid-template-columns: 1fr;
+        padding: 12px 16px;
+    }
+
+    .data_sum_ups>div {
+        padding: 8px 0;
+    }
+
+    .data_sum_ups>div::after {
+        display: none;
+    }
+
+    footer {
+        padding: 0;
+    }
+}
