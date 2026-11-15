@@ -6,113 +6,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CREW</title>
     <link rel="stylesheet" href="./index.css"> <!-- Enlazar el CSS una vez esté creado. (& resto de links) -->
+    <script type="importmap">
+    {
+        "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 
 <body>
     <header>
         <div class="logo_container">
-            <img src="" alt="Logo">
-            <h4>ASTRA</h4>
-            <p>Your spacial health copilot</p>
+            <img src="src/img/logo-crew.png" alt="Logo">
+            <div>
+                <h4>CREW<span>v1.0.0</span></h4>
+                <p>Your spacial health copilot</p>
+            </div>
         </div>
         <div class="card">
-            <img src="" alt="Mision icon">
+            <img src="src/img/icon-nasa.png" alt="Mision icon">
             <p>Day 110 · Transit to Mars</p>
         </div>
         <div class="conexion_info_container">
             <p>No link · automatic mode</p>
-            <img src="" alt="Icon of a point">
+            <img src="src/img/icon-settings.png" alt="Icon of a point">
         </div>
     </header>
 
     <main>
         <div class="left_section">
-            <div class="card">
-                <img class="section_img" src="" alt="Pet icon">
-                <h3 class="section_title">Pet</h3>
-                <p class="description">Your companion during the mision</p>
-                <p class="check_in">Today: resistence 30 min · streak 12 days</p>
-                <img class="arrow" src="" alt="Arrow">
-                <img class="section_line" src="" alt="Line">
-            </div>
-            <div class="card">
-                <img class="section_img" src="" alt="Doctor icon">
-                <h3 class="section_title"></h3>
-                <p class="description">Analize and prepare</p>
-                <p class="check_in">Atention on hip · Report ready</p>
-                <img class="arrow" src="" alt="Arrow">
-                <img class="section_line" src="" alt="Line">
-            </div>
+            <a href="">
+                <div class="card">
+                    <img class="section_img" src="src/img/icon-peet-L.png" alt="Pet icon">
+                    <div>
+                        <h3 class="section_title">Pet</h3>
+                        <p class="description">Your companion during the mision</p>
+                        <p class="check_in">Today: resistence 30 min · streak 12 days</p>
+                    </div>
+                    <div class="icon-arrow">
+                        <img class="arrow" src="src/img/icon-arrow.png" alt="Arrow">
+                    </div>
+                    <!-- <img class="section_line" src="" alt="Line"> -->
+                </div>
+            </a>
+            <a href="/src/html/agente-page.html">
+                <div class="card">
+                    <img class="section_img" src="src/img/icon-doctor-L.png" alt="Doctor icon">
+                    <div>
+                        <h3 class="section_title">Doctor</h3>
+                        <p class="description">Analize and prepare</p>
+                        <p class="check_in">Atention on hip · Report ready</p>
+                    </div>
+                    <div class="icon-arrow">
+                        <img class="arrow" src="src/img/icon-arrow.png" alt="Arrow">
+                    </div>
+                    <!-- <img class="section_line" src="" alt="Line"> -->
+                </div>
+            </a>
         </div>
 
         <div class="img_centre">
-            <img src="" alt="Human scan">
+            <!-- <img src="src/img/human_body.png" alt="Human scan"> -->
+            <div id="canvas-container"></div>
+            <div class="change_button">
+                <button onclick="cambiarModelo('esqueleto')">&lt;</button>
+        <button onclick="cambiarModelo('ecorche')">&gt;</button>
+            </div>
         </div>
 
         <div class="right_section">
-            <div class="card">
-                <img class="section_img" src="" alt="Professor icon">
-                <h3 class="section_title"></h3>
-                <p class="description">Learn and comprehend</p>
-                <p class="check_in">Lecture: bones without gravity</p>
-                <img class="arrow" src="" alt="Arrow">
-                <img class="section_line" src="" alt="Line">
-            </div>
-            <div class="card">
-                <img class="section_img" src="" alt="Psycologist icon">
-                <h3 class="section_title">Psycologist</h3>
-                <p class="description">Take care of your mind</p>
-                <p class="check_in">Pending mood check-in</p>
-                <img class="arrow" src="" alt="Arrow">
-                <img class="section_line" src="" alt="Line">
-            </div>
+            <a href="">
+
+                <div class="card">
+                    <img class="section_img" src="src/img/icon-learn-L.png" alt="Professor icon">
+                    <div>
+                        <h3 class="section_title">Teacher</h3>
+                        <p class="description">Learn and comprehend</p>
+                        <p class="check_in">Lecture: bones without gravity</p>
+                    </div>
+                    <div class="icon-arrow">
+                        <img class="arrow" src="src/img/icon-arrow.png" alt="Arrow">
+                    </div>
+                    <!-- <img class="section_line" src="" alt="Line"> -->
+                </div>
+            </a>
+            <a href="">
+                <div class="card">
+                    <img class="section_img" src="src/img/icon-brain-L.png" alt="Psycologist icon">
+                    <div>
+                        <h3 class="section_title">Psycologist</h3>
+                        <p class="description">Take care of your mind</p>
+                        <p class="check_in">Pending mood check-in</p>
+                    </div>
+                    <div class="icon-arrow">
+                        <img class="arrow" src="src/img/icon-arrow.png" alt="Arrow">
+                    </div>
+                    <!-- <img class="section_line" src="" alt="Line"> -->
+                </div>
+            </a>
         </div>
     </main>
 
     <footer>
-        <div class="data_sum_ups">
-            <div class="mood_sum_up">
-                <img src="" alt="Smiley face icon">
-                <nav class="data_sum_up">
-                    <h5>3</h5>
-                    <p>/5</p>
-                    <p>Mood of today</p>
-                </nav>
+        <a href="tercera.html">
+            <div class="data_sum_ups">
+                <div class="mood_sum_up">
+                    <img src="src/img/icon-smile.png" alt="Smiley face icon">
+                    <nav class="data_sum_up">
+                        <h5>3</h5>
+                        <p>/5</p>
+                        <p>Mood of today</p>
+                    </nav>
+                </div>
+                <div class="sleep_sum_up">
+                    <img src="src/img/icon-sleep.png" alt="Moon icon">
+                    <nav class="data_sum_up">
+                        <h5>6.4</h5>
+                        <p>h</p>
+                        <p>Sleep</p>
+                    </nav>
+                </div>
+                <div class="excercise_sum_up">
+                    <img src="src/img/icon-Barbell.png" alt="Double plus icon">
+                    <nav class="data_sum_up">
+                        <h5>2</h5>
+                        <p>/3</p>
+                        <p>Resistence sessions</p>
+                    </nav>
+                </div>
+                <div class="medical_recommendation">
+                    <img src="src/img/icon-Down_Right.png" alt="Arrow">
+                    <nav class="data_sum_up">
+                        <h5>Down</h5>
+                        <p>Bone (estimated)</p>
+                    </nav>
+                </div>
+                <div class="inbox">
+                    <img src="src/img/icon-rhombus.png" alt="Diamond shaped icon">
+                    <nav class="data_sum_up">
+                        <p>Hip on observation · Queue report</p>
+                    </nav>
+                </div>
             </div>
-            <div class="sleep_sum_up">
-                <img src="" alt="Moon icon">
-                <nav class="data_sum_up">
-                    <h5>6.4</h5>
-                    <p>h</p>
-                    <p>Sleep</p>
-                </nav>
-            </div>
-            <div class="card excercise_sum_up">
-                <img src="" alt="Double plus icon">
-                <nav class="data_sum_up">
-                    <h5>2</h5>
-                    <p>/3</p>
-                    <p>Resistence sessions</p>
-                </nav>
-            </div>
-            <div class="medical_recommendation">
-                <img src="" alt="Arrow">
-                <nav class="data_sum_up">
-                    <h5>Down</h5>
-                    <p>Bone (estimated)</p>
-                </nav>
-            </div>
-            <div class="card inbox">
-                <img src="" alt="Diamond shaped icon">
-                <nav class="data_sum_up">
-                    <p>Hip on observation · Queue report</p>
-                </nav>
-            </div>
-        </div>
+        </a>
         <div class="caution_message">
             <p>Demo with simulated data · Self-assessment support tool, not a diagnostic</p>
         </div>
     </footer>
+    <script type="module" src="src/js/prueba.js"></script>
+    <script src="src/js/cambio.js"></script>
 </body>
 
 </html>
