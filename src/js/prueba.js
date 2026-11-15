@@ -51,7 +51,7 @@ let ecorcheModel = null;
 // CARGAR MODELO 1: Esqueleto Humano
 // ==========================================
 loader.load(
-  "/src/models/esqueleto-humano/source/Esqueleto humano.glb",
+  "../../src/models/esqueleto-humano/source/Esqueleto humano.glb",
   (gltf) => {
     esqueletoModel = gltf.scene;
 

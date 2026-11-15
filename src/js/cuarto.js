@@ -314,7 +314,7 @@ async function cargarModeloAleatorio() {
 
   try {
 
-    const respuesta = await fetch("/src/models/modelos.json");
+    const respuesta = await fetch("./src/models/modelos.json");
     if (!respuesta.ok) {
       throw new Error("Error leyendo JSON: " + respuesta.status);
     }
