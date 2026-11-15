@@ -1,0 +1,549 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background-color: #05080c;
+
+    background-image:
+        linear-gradient(rgba(3, 7, 12, 0.65),
+            rgba(3, 7, 12, 0.85)),
+        url("/src/img/deep_space_background.png");
+
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* body {
+    background-color: #06090d;
+} */
+
+/* .card {
+    background-color: #a3b6ff;
+    border-color: #e6ecfe;
+    border-radius: 30px;
+    padding: 5px;
+    margin: 2px;
+} */
+
+p,
+h3,
+h4,
+h5 {
+    color: white;
+    margin: 1px;
+}
+
+.data_sum_ups {
+    display: flex;
+}
+
+.data_sum_ups div {
+    margin: 0px;
+}
+
+.data_sum_ups>img {
+    display: flex;
+}
+
+/* .data_sum_ups > nav {
+    display: flex;
+} */
+
+/* inbox {
+    display: flex;
+} */
+
+/* h3 h4 h5 */
+/* Contenedor principal del Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* max-width: 1300px; */
+    /* padding: 16px 32px; */
+    background: transparent;
+    /* O un fondo oscuro sutil si lo prefieres */
+    font-family: 'Courier New', Courier, monospace;
+    color: #e0fbfc;
+    box-sizing: border-box;
+}
+
+/*-----------------1. LOGO Y TÍTULO (IZQUIERDA)----------------*/
+/* Contenedor principal del logo */
+.logo_container {
+    display: flex;
+    align-items: center;
+}
+
+/* Imagen del logo ampliada */
+.logo_container img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.8));
+}
+
+/* Bloque que envuelve el título y subtítulo (para mantenerlos juntos en columna) */
+.logo_container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título (ASTRA) */
+.logo_container h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Subtítulo */
+.logo_container p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #7a8c9e;
+    letter-spacing: 0.5px;
+}
+
+/* ----------------- 2. TARJETA CENTRAL (ESTADO DE MISIÓN)-------------*/
+header .card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(10, 15, 25, 0.6);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 30px;
+    padding: 8px 20px;
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05),
+        0 4px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+header .card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.8));
+}
+
+header .card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #c0cdd8;
+    letter-spacing: 1px;
+}
+
+
+/* -------------- 3. INFORMACIÓN DE CONEXIÓN (DERECHA)--------------------*/
+.conexion_info_container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.conexion_info_container p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #a8b8c8;
+    letter-spacing: 0.5px;
+}
+
+.conexion_info_container img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(255, 170, 0, 0.8));
+    /* Tono ámbar/naranja para el punto */
+}
+
+/* -------------------------- MAIN ------------------------------------ */
+
+/* ESTRUCTURA PRINCIPAL DEL MAIN (3 Columnas) */
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    /* padding: 20px 0; */
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    color: #e0fbfc;
+    position: relative;
+}
+
+/* Secciones laterales (agrupan las tarjetas) */
+.left_section>a,
+.right_section>a {
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.left_section>a,
+.right_section>a:visited {
+    color: inherit;
+}
+
+.left_section,
+.right_section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    position: absolute;
+    top: 25%;
+
+}
+
+.left_section {
+    transform: translate();
+    left: 5%;
+}
+
+.right_section {
+    right: 5%;
+}
+
+/* -------------------ESTILO DE LAS TARJETAS (Cápsulas Transparentes) ----------*/
+main .card {
+    width: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(12, 17, 28, 0.55);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 40px;
+    padding: 16px 24px;
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.04), 0 8px 25px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+/* Efecto hover al pasar el cursor */
+main .card:hover {
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.1),
+        0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+/* -------------------- ELEMENTOS INTERNOS DE LA TARJETA ------------------*/
+/* Icono principal de la sección */
+main .card .section_img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.8));
+    flex-shrink: 0;
+}
+
+/* Título de la tarjeta (ej. Pet, Psicólogo, etc.) */
+main .card .section_title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+}
+
+/* Descripción secundaria */
+main .card .description {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #8da4be;
+    letter-spacing: 0.5px;
+    flex-grow: 1;
+}
+
+/* Texto de estado / check-in (ej. streak, status) */
+main .card .check_in {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #00f0ff;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 6px rgba(0, 240, 255, 0.4);
+    flex-shrink: 0;
+}
+
+/* Flecha interactiva a la derecha */
+main .card .icon-arrow {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 1px solid #ffffffff;
+    border-radius: 100%;
+    right: 4%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+main .card .arrow {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+main .card:hover .icon-arrow {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+/* Línea decorativa interna (si la usas) */
+main .card .section_line {
+    display: none;
+    /* Oculta por defecto si usas el diseño de cápsula limpia, o actívala si la requieres */
+}
+
+/* ---------------- CONTENEDOR DE LA IMAGEN CENTRAL (Human Scan) -----------------*/
+.img_centre {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.img_centre img {
+    max-width: 380px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.3));
+}
+
+.change_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+    gap: 15px;
+}
+
+/* Estilo futurista HUD para los botones de flecha */
+.change_button button {
+    pointer-events: auto;
+    /* Reactiva los clics en los botones */
+    background: rgba(0, 255, 255, 0.15);
+    /* Fondo semitransparente cian */
+    border: 1px solid rgba(0, 255, 255, 0.6);
+    /* Borde brillante tipo holograma */
+    color: #00ffff;
+    /* Texto/símbolo en color cian brillante */
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    /* Botones circulares */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.change_button button:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+----------------------Foooter------------------------------- */ footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 15px auto 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+footer>a {
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+footer>a {
+    color: inherit;
+}
+
+/* ----------------------CONTENEDOR PRINCIPAL TIPO CÁPSULA HUD----------------*/
+.data_sum_ups {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    width: 100%;
+    background: rgba(12, 17, 28, 0.65);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 40px;
+    padding: 14px 24px;
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.05),
+        0 8px 25px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+/* Estilo común para cada bloque interior con separador vertical */
+.data_sum_ups>div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
+    position: relative;
+}
+
+/* Líneas divisorias verticales entre elementos (excepto el último) */
+.data_sum_ups>div:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 28px;
+    background: rgba(0, 240, 255, 0.2);
+}
+
+/* Iconos generales de los indicadores */
+.data_sum_ups img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.6));
+    flex-shrink: 0;
+}
+
+/* Estructura interna de textos usando la etiqueta <nav> */
+.data_sum_ups nav.data_sum_up {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* Cifras principales (h5) */
+.data_sum_ups nav.data_sum_up h5 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* Unidades o denominaciones secundarias (/5, h, etc.) */
+.data_sum_ups nav.data_sum_up p:nth-of-type(1) {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #00f0ff;
+}
+
+/* Etiquetas descriptivas inferiores */
+.data_sum_ups nav.data_sum_up p:nth-of-type(2) {
+    width: 100%;
+    margin: 0;
+    font-size: 0.75rem;
+    color: #7a8c9e;
+    letter-spacing: 0.5px;
+}
+
+/* --------------------- ESTILOS ESPECÍFICOS PARA TARJETAS DESTACADAS --------------*/
+
+/* 1. Tarjeta de Ejercicio (Card específica) */
+.data_sum_ups .excercise_sum_up img {
+    filter: drop-shadow(0 0 6px rgba(255, 170, 0, 0.8));
+    /* Tono ámbar para resistencia */
+}
+
+.data_sum_ups .excercise_sum_up nav.data_sum_up p:nth-of-type(1) {
+    color: #ffaa00;
+}
+
+/* 2. Tarjeta Interactiva / Inbox Final (Estilo Alerta Naranja/Ámbar) */
+.data_sum_ups .card.inbox {
+    background: rgba(255, 170, 0, 0.05);
+    border: 1px solid rgba(255, 170, 0, 0.4);
+    border-radius: 30px;
+    padding: 10px 16px;
+    box-shadow: inset 0 0 10px rgba(255, 170, 0, 0.1);
+}
+
+.data_sum_ups .card.inbox::after {
+    display: none;
+    /* Quitamos la barra vertical en la última tarjeta */
+}
+
+.data_sum_ups .card.inbox img {
+    filter: drop-shadow(0 0 6px rgba(255, 170, 0, 0.8));
+}
+
+.data_sum_ups .card.inbox nav.data_sum_up p {
+    color: #e0fbfc;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+}
+
+/* -------------------- MENSAJE DE PRECAUCIÓN INFERIOR ----------------- */
+.caution_message {
+    text-align: center;
+    margin-top: 14px;
+}
+
+.caution_message p {
+    margin: 0;
+    font-size: 0.7rem;
+    color: #5a6e82;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#canvas-container {
+    width: 350px;
+    height: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+#canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+}
