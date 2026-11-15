@@ -1,3 +1,10 @@
+@import url("./agente-page.css");
+@import url("./agente-psycologist.css");
+@import url("./agente-teacher.css");
+@import url("./cuarto.css");
+@import url("./recursos.css");
+
+
 /* ===== Variables ===== */
 :root {
   --bg: #050816;
