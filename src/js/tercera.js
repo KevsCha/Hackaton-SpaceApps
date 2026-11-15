@@ -1,17 +1,16 @@
 /* =====================================================
-   CREW · Interfaz del astronauta (prototipo)
-   Todos los datos son SIMULADOS. Para conectar datos reales,
-   sustituye la función simulate() por tu fuente (API, WebSocket, modelo).
+   CREW · Astronaut interface (prototype)
+   All data is SIMULATED. To connect real data, replace the
+   simulate() function with your source (API, WebSocket, model).
    ===================================================== */
 
 const CONFIG = {
   firstName: 'Ericka',
   fullName: 'Ericka Alexis Venegas Gonzalez',
   subjectId: 'ASTRO-772',
-  photo: 'assets/astronaut.jpg',          // pon aquí tu foto (opcional)
   missionStart: { d: 42, h: 18, m: 55, s: 9 },
   tickMs: 1000,
-  // Rangos orientativos; deben ajustarlos los médicos de la misión
+  // Indicative ranges; the mission medical team should set these
   ranges: {
     hr:   { warnLo: 55, warnHi: 100 },
     spo2: { warnLo: 95 },
@@ -21,14 +20,14 @@ const CONFIG = {
   }
 };
 
-/* ---------- Utilidades ---------- */
+/* ---------- Utilities ---------- */
 const $ = (id) => document.getElementById(id);
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 const rnd = (lo, hi) => lo + Math.random() * (hi - lo);
-const fmt = (n, d = 1) => n.toFixed(d).replace('.', ',');
+const fmt = (n, d = 1) => n.toFixed(d);
 const pad = (n, w = 2) => String(n).padStart(w, '0');
 
-/* ---------- Estado ---------- */
+/* ---------- State ---------- */
 const S = {
   hr: 72, hrBuf: Array.from({ length: 40 }, (_, i) => 72 + Math.sin(i / 3) * 3 + (Math.random() - 0.5) * 2),
   spo2: 99, temp: 36.8,
@@ -44,15 +43,12 @@ const S = {
   log: []
 };
 
-/* ---------- Cabecera y foto ---------- */
+/* ---------- Header and photo ---------- */
 $('subjectId').textContent = CONFIG.subjectId + ' / ' + CONFIG.fullName;
-$('bubbleHi').textContent = 'Hola, ' + CONFIG.firstName;
+$('bubbleHi').textContent = 'Hi, ' + CONFIG.firstName;
+$('photo').alt = 'Portrait of ' + CONFIG.fullName;
 
-(function loadPhoto() {
-  const img = $('photo');
-  img.alt = 'Retrato de ' + CONFIG.fullName;
-})();
-/* ---------- Construcción de elementos dinámicos ---------- */
+/* ---------- Build dynamic elements ---------- */
 const gluBars = $('gluBars');
 for (let i = 0; i < 7; i++) gluBars.appendChild(document.createElement('i'));
 
@@ -62,7 +58,7 @@ for (let i = 0; i < 12; i++) tempSegs.appendChild(document.createElement('i'));
 const moodDots = $('moodDots');
 for (let i = 0; i < 5; i++) moodDots.appendChild(document.createElement('i'));
 
-/* ---------- Estados (semáforo con texto) ---------- */
+/* ---------- Status (text + colour, never colour alone) ---------- */
 function setStatus(el, level, text) {
   el.textContent = text;
   el.classList.toggle('warn', level === 'warn');
@@ -71,7 +67,7 @@ function setStatus(el, level, text) {
 
 /* ---------- Render ---------- */
 function render() {
-  // Frecuencia cardiaca
+  // Heart rate
   $('hr').textContent = Math.round(S.hr);
   const pts = S.hrBuf.map((v, i) => {
     const x = (i / (S.hrBuf.length - 1)) * 200;
@@ -81,63 +77,63 @@ function render() {
   $('hrLine').setAttribute('points', pts.join(' '));
   $('hrArea').setAttribute('points', '0,60 ' + pts.join(' ') + ' 200,60');
 
-  // Presión arterial
+  // Blood pressure
   $('bp').textContent = Math.round(S.sys) + '/' + Math.round(S.dia);
   $('bpBar').style.width = clamp((S.sys / 180) * 100, 0, 100) + '%';
   const bpOk = S.sys < CONFIG.ranges.sys.warnHi;
-  setStatus($('bpStatus'), bpOk ? 'ok' : 'warn', bpOk ? 'ESTADO: NOMINAL' : 'ESTADO: ELEVADA · VIGILAR');
+  setStatus($('bpStatus'), bpOk ? 'ok' : 'warn', bpOk ? 'STATUS: NOMINAL' : 'STATUS: ELEVATED · WATCH');
 
-  // Glucosa
+  // Glucose
   $('glu').textContent = Math.round(S.glu);
   [...gluBars.children].forEach((b, i) => {
     const v = S.gluBuf[i];
     b.style.height = clamp(((v - 70) / 60) * 100, 12, 100) + '%';
   });
 
-  // Masa ósea (estimada)
+  // Bone mass (estimated)
   $('bone').textContent = fmt(S.bone, 2);
   const pct = (S.bone / S.boneBase) * 100;
   $('boneBar').style.width = clamp(pct, 0, 100) + '%';
   const drop = 100 - pct;
   const boneLevel = drop > 5 ? 'alert' : drop > 2 ? 'warn' : 'ok';
   setStatus($('boneStatus'), boneLevel,
-    boneLevel === 'ok' ? 'ESTADO: NOMINAL' : 'ESTADO: ' + (boneLevel === 'warn' ? 'VIGILAR' : 'ATENCIÓN') + ' · −' + Math.round(drop) + ' % VS. LÍNEA BASE');
+    boneLevel === 'ok' ? 'STATUS: NOMINAL' : 'STATUS: ' + (boneLevel === 'warn' ? 'WATCH' : 'ATTENTION') + ' · −' + Math.round(drop) + '% VS. BASELINE');
   $('boneBar').style.background = boneLevel === 'ok' ? '' : (boneLevel === 'warn' ? 'var(--amber)' : 'var(--red)');
 
   // SpO2
   $('spo2').textContent = Math.round(S.spo2);
   $('spo2Bar').style.width = clamp(S.spo2, 0, 100) + '%';
 
-  // Temperatura
+  // Temperature
   $('temp').textContent = fmt(S.temp, 1);
   const idx = clamp(Math.round(((S.temp - 36.0) / 1.6) * 11), 0, 11);
   [...tempSegs.children].forEach((s, i) => s.classList.toggle('on', i === idx || i === idx + 1));
 
-  // Ánimo
+  // Mood
   [...moodDots.children].forEach((d, i) => d.classList.toggle('on', i < S.moodScore));
-  moodDots.setAttribute('aria-label', 'Ánimo ' + S.moodScore + ' de 5');
+  moodDots.setAttribute('aria-label', 'Mood ' + S.moodScore + ' of 5');
 
-  // Sueño
+  // Sleep
   const h = Math.floor(S.sleepMin / 60), m = S.sleepMin % 60;
   $('sleep').textContent = pad(h) + ':' + pad(m);
   const sleepOk = S.sleepMin >= 420;
-  setStatus($('sleepStatus'), sleepOk ? 'ok' : 'warn', sleepOk ? 'DENTRO DE LO RECOMENDADO (7 A 9 H)' : 'POR DEBAJO DE LO RECOMENDADO (7 A 9 H)');
+  setStatus($('sleepStatus'), sleepOk ? 'ok' : 'warn', sleepOk ? 'WITHIN RECOMMENDED RANGE (7 TO 9 H)' : 'BELOW RECOMMENDED RANGE (7 TO 9 H)');
 
-  // Radiación
+  // Radiation
   $('rad').textContent = fmt(S.radToday, 1);
   $('radBar').style.width = clamp((S.radCum / S.radLimit) * 100, 0, 100) + '%';
-  $('radCum').textContent = 'ACUMULADA: ' + Math.round(S.radCum) + ' mSv';
+  $('radCum').textContent = 'CUMULATIVE: ' + Math.round(S.radCum) + ' mSv';
 
-  // Cabecera
+  // Header
   const d = Math.floor(S.elapsed / 86400);
   const r = S.elapsed % 86400;
   $('met').textContent = pad(d, 3) + ':' + pad(Math.floor(r / 3600)) + ':' + pad(Math.floor((r % 3600) / 60)) + ':' + pad(r % 60);
-  $('battery').setAttribute('aria-label', 'Batería ' + Math.round(S.battery) + ' %');
+  $('battery').setAttribute('aria-label', 'Battery ' + Math.round(S.battery) + '%');
   $('batFill').setAttribute('width', String(Math.max(1, Math.round(11 * S.battery / 100))));
-  $('uplink').textContent = 'ENLACE SATELITAL (LAG ' + Math.round(S.lag) + ' MS)';
+  $('uplink').textContent = 'SATELLITE UPLINK (LAG ' + Math.round(S.lag) + ' MS)';
 }
 
-/* ---------- Simulación (sustituir por datos reales) ---------- */
+/* ---------- Simulation (replace with real data) ---------- */
 let tickCount = 0;
 function simulate() {
   tickCount++;
@@ -159,7 +155,7 @@ function simulate() {
   if (tickCount % 20 === 0) S.battery = clamp(S.battery - 0.05, 5, 100);
   S.radCum += 1.8 / 86400;
 
-  // Registro para exportar
+  // Log row for export
   S.log.push({
     t: new Date().toISOString(),
     met: $('met').textContent,
@@ -172,44 +168,44 @@ function simulate() {
   render();
 }
 
-/* ---------- Asistente (respuestas de ejemplo, sin IA real) ---------- */
+/* ---------- Assistant (sample replies, no real AI) ---------- */
 const bubbleMsg = $('bubbleMsg');
 const quick = $('quick');
 
 function say(text) { bubbleMsg.textContent = text; }
 
 const REPLIES = [
-  { re: /(sue[ñn]o|dorm|descans|insomn)/i,
-    text: 'Has dormido 6 h 24 min, por debajo de tu línea base. Te propongo: pantallas fuera 45 min antes, luz cálida en la cabina y ejercicio de resistencia antes de la tarde. ¿Lo programo?' },
-  { re: /(hueso|cadera|f[eé]mur|densidad|calcio|ejercicio|resistencia)/i,
-    text: 'La estimación ósea de cadera baja un 3 % respecto a tu línea base. No hay DXA a bordo, así que es una estimación. La mejor respuesta es completar las 3 sesiones de resistencia semanales; esta semana llevas 2.' },
-  { re: /(ánimo|animo|triste|estres|estrés|ansied|solo|sola|echo de menos)/i,
-    text: 'Tu ánimo lleva 3 días a la baja. Es frecuente en tránsitos largos. Puedo guiarte en una pausa de respiración de 5 minutos, o avisar a un compañero o a Tierra si prefieres hablarlo con una persona.' },
-  { re: /(radiaci|dosis|sievert|msv)/i,
-    text: 'Hoy llevas 1,8 mSv y unos 198 mSv acumulados, un tercio del límite de carrera de 600 mSv. El blindaje del módulo funciona al 98 %.' },
-  { re: /(informe|tierra|m[eé]dico|doctor|flight)/i,
-    text: 'He dejado un informe preparado para la flight surgeon con tus tendencias de las últimas 2 semanas. Se enviará en cuanto haya enlace estable.' }
+  { re: /(sleep|slept|rest|insomnia|tired|nap)/i,
+    text: 'You slept 6 h 24 min, below your baseline. Try: screens off 45 min before bed, warm light in the cabin, and resistance exercise earlier in the day. Shall I schedule it?' },
+  { re: /(bone|hip|femur|density|calcium|exercise|resistance|workout)/i,
+    text: 'Your estimated hip bone density is down 3% from baseline. There is no DXA on board, so this is a model estimate. The best response is completing all 3 weekly resistance sessions; you have done 2 this week.' },
+  { re: /(mood|sad|stress|anxi|lonely|alone|miss my|homesick)/i,
+    text: 'Your mood has been trending down for 3 days. That is common on long transits. I can guide you through a 5-minute breathing break, or alert a crewmate or Ground if you would rather talk to a person.' },
+  { re: /(radiation|dose|sievert|msv)/i,
+    text: 'Today you are at 1.8 mSv with about 198 mSv cumulative, roughly a third of the 600 mSv career limit. The module shielding is operating at 98%.' },
+  { re: /(report|ground|doctor|flight|medical|surgeon)/i,
+    text: 'I have prepared a report for the flight surgeon with your trends from the last 2 weeks. It will be sent as soon as a stable link is available.' }
 ];
-const CRISIS = /(no puedo m[aá]s|hacerme da[ñn]o|quiero morir|acabar con todo|suicid)/i;
+const CRISIS = /(can'?t go on|hurt myself|want to die|end it all|kill myself|suicid)/i;
 
 function reply(text) {
   if (CRISIS.test(text)) {
-    say('Siento que estés pasando por esto, y me alegra que me lo cuentes. No quiero que lo afrontes solo/a: avisa ahora a un compañero o contacta con el equipo médico de Tierra. Estoy aquí contigo mientras tanto.');
+    say('I am sorry you are going through this, and I am glad you told me. I do not want you to face it alone: alert a crewmate now or contact the medical team on Ground. I am here with you in the meantime.');
     return;
   }
   const hit = REPLIES.find((r) => r.re.test(text));
-  say(hit ? hit.text : 'Puedo ayudarte con tu sueño, tus huesos, tu ánimo, la radiación o preparar un informe para Tierra. ¿Por dónde empezamos?');
+  say(hit ? hit.text : 'I can help with your sleep, bones, mood, radiation, or prepare a report for Ground. Where shall we start?');
 }
 
-const QUICK = ['Revisar mi sueño', 'Estado de mis huesos', 'Pausa de respiración', 'Hablar con una persona'];
+const QUICK = ['Review my sleep', 'Check my bones', 'Breathing break', 'Talk to a person'];
 QUICK.forEach((label) => {
   const b = document.createElement('button');
   b.type = 'button'; b.textContent = label;
   b.addEventListener('click', () => {
-    if (label === 'Pausa de respiración') {
-      say('Vamos allá: inhala 4 segundos, mantén 4, exhala 6. Repite 5 veces. Cuando termines, dime cómo te sientes.');
-    } else if (label === 'Hablar con una persona') {
-      say('Entendido. Aviso al compañero de guardia y dejo un mensaje al equipo médico de Tierra para cuando haya enlace.');
+    if (label === 'Breathing break') {
+      say('Here we go: inhale for 4 seconds, hold for 4, exhale for 6. Repeat 5 times. When you finish, tell me how you feel.');
+    } else if (label === 'Talk to a person') {
+      say('Understood. I am alerting the crewmate on duty and leaving a message for the medical team on Ground for when the link is up.');
     } else {
       reply(label);
     }
@@ -226,21 +222,21 @@ $('askForm').addEventListener('submit', (e) => {
   input.value = '';
 });
 
-say('He notado que tu ánimo ha bajado 3 días seguidos y que duermes menos de lo habitual. ¿Revisamos tu protocolo de sueño?');
+say('I noticed your mood has dropped 3 days in a row and you are sleeping less than usual. Shall we review your sleep protocol?');
 
-/* ---------- Botones de la barra ---------- */
+/* ---------- Bottom bar buttons ---------- */
 $('scanBtn').addEventListener('click', () => {
   const btn = $('scanBtn');
   btn.disabled = true;
   let p = 0;
   const id = setInterval(() => {
     p += 8;
-    btn.textContent = 'ESCANEANDO… ' + Math.min(p, 100) + ' %';
+    btn.textContent = 'SCANNING… ' + Math.min(p, 100) + '%';
     if (p >= 100) {
       clearInterval(id);
       btn.disabled = false;
-      btn.textContent = 'ESCANEO CORPORAL';
-      say('Escaneo completo (simulado): sin hallazgos nuevos. Cadera y fémur siguen en vigilancia; el resto, dentro de tu línea base.');
+      btn.textContent = 'FULL BODY SCAN';
+      say('Scan complete (simulated): no new findings. Hip and femur remain on watch; everything else is within your baseline.');
     }
   }, 240);
 });
@@ -252,13 +248,13 @@ $('exportBtn').addEventListener('click', () => {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'registros_' + CONFIG.subjectId + '.csv';
+  a.download = 'logs_' + CONFIG.subjectId + '.csv';
   document.body.appendChild(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 
-/* ---------- Arranque ---------- */
+/* ---------- Start ---------- */
 render();
 setInterval(simulate, CONFIG.tickMs);
