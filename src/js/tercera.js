@@ -50,11 +50,8 @@ $('bubbleHi').textContent = 'Hola, ' + CONFIG.firstName;
 
 (function loadPhoto() {
   const img = $('photo');
-  img.onload = () => { img.hidden = false; $('avatar').style.display = 'none'; img.alt = 'Retrato de ' + CONFIG.fullName; };
-  img.onerror = () => { img.hidden = true; };
-  img.src = CONFIG.photo;
+  img.alt = 'Retrato de ' + CONFIG.fullName;
 })();
-
 /* ---------- Construcción de elementos dinámicos ---------- */
 const gluBars = $('gluBars');
 for (let i = 0; i < 7; i++) gluBars.appendChild(document.createElement('i'));
