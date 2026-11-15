@@ -677,8 +677,11 @@ footer>a {
     }
 
     #canvas-container {
-        width: min(100%, 280px);
-        height: 420px;
+        /* width: min(100%, 280px); */
+        /* height: 420px; */
+         height: 450px;
+        min-height: 450px;
+
     }
 
     main .card {
