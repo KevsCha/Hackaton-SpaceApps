@@ -15,3 +15,9 @@ window.cambiarModelo = function(tipo) {
     console.log("Mostrando: Sistema Muscular / Ecorché");
   }
 };
+
+
+const boton = document.getElementById("canvas-container");
+boton.addEventListener("dblclick", function(e){
+  window.location.href = "../../cuarto.html";
+});
