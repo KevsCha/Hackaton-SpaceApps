@@ -590,3 +590,36 @@ main {
     color: #a8b8c8;
     letter-spacing: 0.5px;
 }
+
+
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .container-agente {
+        margin-top: 20px;
+    }
+    .icon-ondas {
+        display: none !important;
+    }
+
+    .info-connexion {
+        display: none;
+    }
+    .container-main {
+        width: 100%;
+    }
+
+    .container-infoMedico {
+        width: 100%;
+        max-width: none;
+    }
+    .agente-info {
+        display: none;
+    }
+    .container-setting {
+        display: none;
+    }
+}
