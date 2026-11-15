@@ -73,4 +73,4 @@ Some browsers block scripts when a page is opened directly from the file system.
 ## Links
 
 - Project demonstration: https://canva.link/g76716trf8e4234
-- Web: [https://github.com/KevsCha/Hackaton-SpaceApps](https://kevscha.github.io/Hackaton-SpaceApps/tercera.html)
+- Web: [https://github.com/KevsCha/Hackaton-SpaceApps](https://kevscha.github.io/Hackaton-SpaceApps/index.html)
